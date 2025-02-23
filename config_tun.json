@@ -26,14 +26,16 @@
  {
    "servers": 
    [
-     {"tag": "dns_direct", "address": "223.5.5.5", "address_strategy": "ipv4_only", "strategy": "ipv4_only", "detour": "🎯 全球直连"},
+     {"tag": "dns_direct", "address": "223.5.5.5", "address_strategy": "ipv4_only", "strategy": "prefer_ipv4", "detour": "🎯 全球直连"},
      {"tag": "dns_proxy", "address": "tls://8.8.8.8", "address_strategy": "ipv4_only", "strategy": "ipv4_only", "detour": "🚀 节点选择"}
+     {"tag": "dns_block","address": "rcode://refused"},
    ],
    "rules": 
    [
      {"outbound": "any", "server": "dns_direct", "disable_cache": true},
      {"clash_mode": "Direct", "server": "dns_direct"},
      {"clash_mode": "Global", "server": "dns_proxy"},
+     {"rule_set": "ads", "server": "dns_block"}
      {"rule_set": "geosite-cn", "action": "route","server": "dns_direct"},
      {"rule_set": "geosite-geolocation-!cn", "server": "dns_proxy"}
    ],
@@ -121,6 +123,7 @@
     
    "rule_set": [
       { "tag": "geosite-chat", "type": "remote", "format": "binary", "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/category-ai-chat-!cn.srs", "download_detour": "🎯 全球直连" },
+      { "tag": "ads", "type": "remote", "format": "binary", "url": "https://ghfast.top/https://github.com/DustinWin/ruleset_geodata/releases/download/sing-box-ruleset/ads.srs", "download_detour": "🎯 全球直连" },
       { "tag": "geosite-youtube", "type": "remote", "format": "binary", "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/youtube.srs", "download_detour": "🎯 全球直连" },
       { "tag": "geosite-google", "type": "remote", "format": "binary", "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/google.srs", "download_detour": "🎯 全球直连" },
       { "tag": "geosite-github", "type": "remote", "format": "binary", "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/github.srs", "download_detour": "🎯 全球直连" },
